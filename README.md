@@ -6,6 +6,7 @@ Bringing the Builder Design Pattern to Python
 
 <!-- Shields Here -->
 <p align="center">
+[![Python CI/CD](https://github.com/kevdog824/pyuilder/actions/workflows/python.yml/badge.svg)](https://github.com/kevdog824/pyuilder/actions/workflows/python.yml)
 </p>
 
 ---
