@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 
 [project]
-name = "Pyuilder"
-version = "0.0.1"
+name = "pyuilder"
+version = "0.0.3"
 description = "Provides functionality for implementing the builder pattern in Python."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -29,8 +29,10 @@ dependencies = []
 
 
 [project.optional-dependencies]
-dev = ["ruff==0.4.3", "pyright==1.1.361", "mypy-1.10.0"]
-test = ["mypy==1.10.0", "pytest==8.2.0", "pytest-cov==5.0.0", "ruff==0.4.3"]
+dev = ["mypy==1.10.0", "ruff==0.4.3"]
+test = ["pytest==8.2.0", "pytest-cov==5.0.0"]
+publish = ["build==1.2.1", "twine==5.0.0"]
+ci = ["pyuilder[dev]", "pyuilder[test]", "pyuilder[publish]"]
 
 
 [project.urls]
@@ -41,6 +43,19 @@ test = ["mypy==1.10.0", "pytest==8.2.0", "pytest-cov==5.0.0", "ruff==0.4.3"]
 
 [tool.setuptools]
 package-data = { "sample" = ["*.dat"] }
+
+
+[tool.coverage.paths]
+source = ["src"]
+
+
+[tool.coverage.report]
+fail_under = 70
+show_missing = true
+
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
 
 
 [tool.ruff]
@@ -54,7 +69,6 @@ exclude = [
 ]
 line-length = 88
 indent-width = 4
-target-version = "py312"
 
 
 [tool.ruff.format]
@@ -72,7 +86,3 @@ fixable = ["ALL"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
-
-
-[tool.pytest.ini_options]
-testpaths = ["test"]

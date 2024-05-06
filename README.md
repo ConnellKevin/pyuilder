@@ -6,6 +6,9 @@ Bringing the Builder Design Pattern to Python
 
 <!-- Shields Here -->
 <p align="center">
+<img alt="Version" src="https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fkevdog824%2Fpyuilder%2Fmain%2Fpyproject.toml"/>
+<img alt="License" src="https://img.shields.io/github/license/Kevdog824/pyuilder"/>
+<a href="https://github.com/kevdog824/pyuilder/actions/workflows/python.yml"><img alt="Actions Status" src="https://github.com/kevdog824/pyuilder/actions/workflows/python.yml/badge.svg"></a>
 </p>
 
 ---
@@ -127,7 +130,7 @@ If the second parameter to a field setter is a `Callable` as it is in the third 
 
 ## Change log
 
-See [CHANGELOG](CHANGELOG.md).
+See [CHANGELOG](https://github.com/kevdog824/pyuilder/blob/main/CHANGELOG.md).
 
 ## License
 
