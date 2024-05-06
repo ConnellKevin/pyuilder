@@ -29,8 +29,14 @@ dependencies = []
 
 
 [project.optional-dependencies]
-dev = []
-test = ["pytest==8.2.0"]
+dev = ["ruff==0.4.3", "pyright==1.1.361", "mypy-1.10.0"]
+test = [
+    "ruff==0.4.3",
+    "pyright==1.1.361",
+    "pytest==8.2.0",
+    "pytest-cov==5.0.0",
+    "mypy==1.10.0",
+]
 
 
 [project.urls]
@@ -77,4 +83,4 @@ convention = "google"
 
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["test"]

@@ -8,7 +8,7 @@ from pyuilder import Buildable, Builder, Setter
 
 
 class NoExplicitBuilderBuildable(Buildable):
-    def __init__(self, field1: int, field2: str) -> None:
+    def __init__(self, field1: int = 0, field2: str = "DEFAULT") -> None:
         self.field1 = field1
         self.field2 = field2
 

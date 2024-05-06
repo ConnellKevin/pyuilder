@@ -1,35 +1,29 @@
 name: Python CI
 
-
 on:
-  
-  push:
-    paths-ignore:
-      - "**/README.md"
-      - "**/CHANGELOG.md"
-      - "**/LICENSE"
-  
-  workflow_dispatch:
+    push:
+        paths-ignore:
+            - "**/README.md"
+            - "**/CHANGELOG.md"
+            - "**/LICENSE"
 
+    workflow_dispatch:
 
-permissions: 
-  statuses: write
-  pull-requests: write
-
+permissions:
+    statuses: write
+    pull-requests: write
 
 jobs:
     
     build:
-        
         strategy:
             matrix:
                 os: [ubuntu-latest, macos-latest, windows-latest]
                 python: ["3.8", "3.9", "3.10", "3.11", "3.12"]
-        
-        runs-on: ${{matrix.os}}
-        
-        steps:
 
+        runs-on: ${{matrix.os}}
+
+        steps:
             - name: Build Information
               run: echo "Running project CI [Python ${{matrix.python}} on ${{runner.os}}]"
 
@@ -42,49 +36,58 @@ jobs:
             - name: Setup Python
               uses: actions/setup-python@v4
               with:
-                python-version: ${{matrix.python}}
-                cache: 'pip'
-            
+                  python-version: ${{matrix.python}}
+                  cache: "pip"
+
             - name: Upgrade Pip
               run: python -m pip install --upgrade pip
-            
-            - name: Install Dependencies
-              run: pip install -r requirements.txt
-            
+
+            - name: Install Package
+              run: pip install -e .[test]
+
             - name: Linting
               run: |
-                pip install ruff
-                ruff --output-format=github src
-            
+                  ruff --output-format=github src
+
             - name: Static Type Analysis
               run: |
-                pip install mypy
-                pip install pyright
-                mypy src
-                pyright src
-            
+                  mypy src
+                  pyright src
+
             - name: Run Tests
               run: |
-                pip install pytest pytest-cov
-                python -m pytest --junitxml=reports/tests.xml --cov --cov-fail-under=70
-            
+                  python -m pytest --junitxml=reports/tests.xml --cov --cov-fail-under=70
+
             - name: Generate Coverage Report
               run: python -m coverage xml -o reports/coverage.xml
-            
+
             - name: Publish Test Results
               uses: actions/upload-artifact@v3
               with:
-                name: tests.xml
-                path: reports/tests.xml
-            
+                  name: tests.xml
+                  path: reports/tests.xml
+
             - name: Publish Code Coverage Results
               uses: actions/upload-artifact@v3
               with:
-                name: coverage.xml
-                path: reports/coverage.xml
+                  name: coverage.xml
+                  path: reports/coverage.xml
 
             - name: Update Commit Status With Build Result
               if: always()
               uses: ouzi-dev/commit-status-updater@v2
               with:
-                status: "${{ job.status }}"
+                  status: "${{ job.status }}"
+
+    test-pypi-publish:
+        name: publish package to test PyPI
+        needs: build
+        runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+        
+        steps:
+            - name: Publish package distributions to test PyPI
+              uses: pypa/gh-action-pypi-publish@release/v1
+              with:
+                repository-url: https://test.pypi.org/legacy/
