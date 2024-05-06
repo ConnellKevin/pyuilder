@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 
 [project]
-name = "Pyuilder"
+name = "pyuilder"
 version = "0.0.1"
 description = "Provides functionality for implementing the builder pattern in Python."
 readme = "README.md"
@@ -29,8 +29,10 @@ dependencies = []
 
 
 [project.optional-dependencies]
-dev = ["ruff==0.4.3", "pyright==1.1.361", "mypy-1.10.0"]
-test = ["mypy==1.10.0", "pytest==8.2.0", "pytest-cov==5.0.0", "ruff==0.4.3"]
+dev = ["mypy==1.10.0", "ruff==0.4.3"]
+test = ["pytest==8.2.0", "pytest-cov==5.0.0"]
+publish = ["build==1.2.1", "twine==5.0.0"]
+ci = ["pyuilder[dev]", "pyuilder[test]", "pyuilder[publish]"]
 
 
 [project.urls]
@@ -67,7 +69,6 @@ exclude = [
 ]
 line-length = 88
 indent-width = 4
-target-version = "py312"
 
 
 [tool.ruff.format]
