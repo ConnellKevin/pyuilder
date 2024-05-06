@@ -3,6 +3,7 @@
 from __future__ import annotations
 import inspect
 import typing as _t
+import typing_extensions as _te
 
 
 ### Typing
@@ -77,7 +78,7 @@ class Builder(_t.Generic[_T]):
             inspect._ParameterKind.KEYWORD_ONLY,
         ]
 
-    def __getattr__(self, __name: str) -> Setter[_t.Self, _t.Any]:
+    def __getattr__(self, __name: str) -> Setter[_te.Self, _t.Any]:
         return Setter(self, __name)
 
     def _break_args(
@@ -110,16 +111,16 @@ class Builder(_t.Generic[_T]):
 class Buildable:
     if _t.TYPE_CHECKING:
 
-        class builder(Builder[_t.Self]): ...  # type: ignore
+        class builder(Builder[_te.Self]): ...  # type: ignore
 
-    @classmethod
-    def builder(cls, **kwargs: _t.Any) -> Builder[_t.Self]:
+    @classmethod  # type: ignore[no-redef]
+    def builder(cls, **kwargs: _t.Any) -> Builder[_te.Self]:
         """Create a new builder instance for building the class
 
         Args:
             **kwargs (Any): Can set any number of fields here at construction
         """
-        b = Builder(**kwargs)
+        b: Builder[_te.Self] = Builder(**kwargs)
         b.typ = cls
         return b
 

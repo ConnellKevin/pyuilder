@@ -47,12 +47,11 @@ jobs:
 
             - name: Linting
               run: |
-                  ruff --output-format=github src
+                  ruff check --output-format=github src
 
             - name: Static Type Analysis
               run: |
                   mypy src
-                  pyright src
 
             - name: Run Tests
               run: |

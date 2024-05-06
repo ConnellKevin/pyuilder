@@ -30,21 +30,13 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["ruff==0.4.3", "pyright==1.1.361", "mypy-1.10.0"]
-test = [
-    "ruff==0.4.3",
-    "pyright==1.1.361",
-    "pytest==8.2.0",
-    "pytest-cov==5.0.0",
-    "mypy==1.10.0",
-]
+test = ["mypy==1.10.0", "pytest==8.2.0", "pytest-cov==5.0.0", "ruff==0.4.3"]
 
 
 [project.urls]
-"Homepage" = "https://github.com/pypa/sampleproject"
-"Bug Reports" = "https://github.com/pypa/sampleproject/issues"
-"Funding" = "https://donate.pypi.org"
-"Say Thanks!" = "http://saythanks.io/to/example"
-"Source" = "https://github.com/pypa/sampleproject/"
+"Homepage" = "https://github.com/kevdog824/pyuilder"
+"Bug Reports" = "https://github.com/kevdog824/pyuilder/issues"
+"Source" = "https://github.com/kevdog824/pyuilder"
 
 
 [tool.setuptools]
