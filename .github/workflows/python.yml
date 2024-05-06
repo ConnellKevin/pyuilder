@@ -1,4 +1,4 @@
-name: Python CI
+name: Python CI/CD
 
 on:
     push:
@@ -82,6 +82,8 @@ jobs:
         name: publish package to test PyPI
         needs: build
         runs-on: ubuntu-latest
+        environment:
+            name: test
         permissions:
             id-token: write
         
