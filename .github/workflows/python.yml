@@ -91,9 +91,6 @@ jobs:
             - name: Build Information
               run: echo "Publishing package"
 
-            - name: Set Commit Status to Pending
-              uses: ouzi-dev/commit-status-updater@v2
-
             - name: Checkout Code From "${{github.ref_name}}"
               uses: actions/checkout@v4
 
@@ -117,9 +114,3 @@ jobs:
               uses: pypa/gh-action-pypi-publish@release/v1
               with:
                 repository-url: https://test.pypi.org/legacy/
-            
-            - name: Update Commit Status With Build Result
-              if: always()
-              uses: ouzi-dev/commit-status-updater@v2
-              with:
-                  status: "${{ job.status }}"
