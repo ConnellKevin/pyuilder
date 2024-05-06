@@ -1,0 +1,24 @@
+### Application
+
+/reports
+
+
+### Python
+
+**/__pycache__
+**/.venv
+**/.coverage
+**/.mypy_cache
+**/.pytest_cache
+**/.ruff_cache
+
+
+### Build
+
+**/dist
+**/*.egg-info/
+
+
+### Tools/Tooling
+
+.vscode
