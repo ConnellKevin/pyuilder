@@ -6,6 +6,9 @@ on:
             - "**/README.md"
             - "**/CHANGELOG.md"
             - "**/LICENSE"
+    pull_request:
+        - develop
+        - main
 
     workflow_dispatch:
 
