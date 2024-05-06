@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyuilder"
-version = "0.0.2"
+version = "0.0.3"
 description = "Provides functionality for implementing the builder pattern in Python."
 readme = "README.md"
 requires-python = ">=3.8"
