@@ -111,7 +111,7 @@ class Builder(_t.Generic[_T]):
 class Buildable:
     if _t.TYPE_CHECKING:
 
-        class builder(Builder[_te.Self]): ...  # type: ignore
+        class builder(Builder[_te.Self]): ...  # type: ignore # pragma: no cover
 
     @classmethod  # type: ignore[no-redef]
     def builder(cls, **kwargs: _t.Any) -> Builder[_te.Self]:
