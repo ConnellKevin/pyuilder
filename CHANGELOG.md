@@ -1,5 +1,12 @@
 # Changelog
 
+<h2 id="version-0-0-7">v0.0.7</h2>
+
+2024-05-11
+
+* Fixed some mistakes in project documentation
+* Included `RelaxedBuilder` from [v0.0.5](#version-0-0-5) in package `__init__.py`
+
 <h2 id="version-0-0-6">v0.0.6</h2>
 
 2024-05-11
