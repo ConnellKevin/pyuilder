@@ -1,4 +1,4 @@
-<h1 align="center">Pyuilder ("pill-der")</h1>
+<h1 id="title" align="center">Pyuilder ("pill-der")</h1>
 
 <h2 align="center">
 Bringing the Builder Design Pattern to Python
@@ -18,23 +18,26 @@ Bringing the Builder Design Pattern to Python
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Usage](#usage)
-    - [Simple example](#customize-the-builder--add-type-annotations)
-    - [Customize the Builder & Add Type Annotations](#simple-example)
+    - [Simple example](#simple-example)
+    - [Customize the Builder & Add Type Annotations](#customize-the-builder-and-add-type-annotations)
+    - [Set How Strict Static Type Checking Is Done on Builders](#set-how-strict-static-type-checking-is-done-on-builders)
     - [Customize the Way Fields Are Set](#customize-the-way-fields-are-set)
 - [Change log](#change-log)
 - [License](#license)
 
-## Getting started
+<h2 id="getting-started">Getting started</h2>
 
-### Installation
+<h3 id="installation">Installation</h3>
 
 ```shell
 pip install pyuilder
 ```
 
-### Usage
+<p align="right"><small><a href="#title">Back to top</a></small></p>
 
-#### Simple example
+<h3 id="usage">Usage</h3>
+
+<h4 id="simple-example">Simple example</h4>
 
 Getting started is as easily as inheriting from `pyuilder.Buildable`:
 
@@ -48,10 +51,12 @@ class MyBuildable(pyuilder.Buildable):
         self.field2 = field2
 
 
-MyBuildable.build().field1(1).field2("hello world").build()
+MyBuildable.builder().field1(1).field2("hello world").build()
 ```
 
-#### Customize the Builder & Add Type Annotations
+<p align="right"><small><a href="#title">Back to top</a></small></p>
+
+<h4 id="customize-the-builder-and-add-type-annotations">Customize the Builder & Add Type Annotations</h4>
 
 The last example was great and easy to set up but you'll quickly notice you get no intellisense or typing annotations in your IDE. If that's alright with you: great! However, if you want a little more out of pyuilder it's pretty trivial to provide as much information as you want to pyuilder's `Buildable` to get auto-complete, type-hinting, and other useful information in your IDE:
 
@@ -71,7 +76,7 @@ class MyBuildable(Buildable):
         self.field2 = field2
 
 
-MyBuildable.build()\
+MyBuildable.builder()\
     .field1(1)\
     .field2("hello world")\
     .build()
@@ -87,7 +92,19 @@ The setup here ensures correct auto-complete, type hints, etc.:
     This ensures that type hints aren't lost on chained field setter calls: `field1(1).field2("hello world")`.
   - The second `TypeVar` indicates the value type the field setter accepts: `.field1(value: int).field2(value: str)`.
 
-#### Customize the Way Fields Are Set
+<p align="right"><small><a href="#title">Back to top</a></small></p>
+
+<h4 id="set-how-strict-static-type-checking-is-done-on-builders">Set How Strict Static Type Checking Is Done on Builders</h4>
+
+If you try out the example about in an IDE you may notice that trying to use the builder with any field name other than the ones you annotated in your custom builder class will end with red squigglies under your code. This is because the `Builder` class is set up to *appear* (see note below) to only allow the fields you explicitly declared to static type checkers.
+
+However, you may want to maintain intellisense for annotated fields but want to be able to use any field without warnings from your static type check. pyuilder offers a variant of `Bulder` called `RelaxedBuilder` that does just that. The setup is exactly the same as above. Just replace `Builder` with `RelaxedBuilder`.
+
+**NOTE**: Under the hood `Builder` and `RelaxBuilder` really do exactly the same thing. There is no behavioral difference between the two classes during runtime. They only differ in how they are processed during static type analysis.
+
+<p align="right"><small><a href="#title">Back to top</a></small></p>
+
+<h4 id="customize-the-way-fields-are-set">Customize the Way Fields Are Set</h4>
 
 The other thing you might want to do is have better control how fields are set when you do something like `.builder().field(...)`. If `field` was a `list` for example you might want to be able to call `field(...)` on the builder multiple times to continuously append values to it (similar to Lombok's `@Singular` in Java). This is certainly possible with pyuilder:
 
@@ -108,17 +125,17 @@ class MyBuildable(Buildable):
 # Examples
 
 # Setting the field as a list explicitly
-MyBuildable.build().field(["foo", "bar"]).build()
+MyBuildable.builder().field(["foo", "bar"]).build()
 
 # Specifying how it should be added via str
-MyBuildable.build()\
+MyBuildable.builder()\
     .field([])\
     .field("foo", "append")\
     .field("bar", "append")\
     .build()
 
 # Specifying how it should be added via callable
-MyBuildable.build()\
+MyBuildable.builder()\
     .field(["foo"])\
     .field("bar", list.append)\
     .build()
@@ -128,10 +145,16 @@ If the second parameter to a field setter is a `str` as it is in the second exam
 
 If the second parameter to a field setter is a `Callable` as it is in the third example the setter will call that method. When the setter calls it it will give the existing value as the first argument to the callable and the provided value as the second argument to the callable. In the example above, the provided `list.append` callable is called with two arguments as described above: `list.append(existing, value)` where `existing = ["foo"]` and `value = "bar"`.
 
-## Change log
+<p align="right"><small><a href="#title">Back to top</a></small></p>
+
+<h2 id="change-log">Change log</h2>
 
 See [CHANGELOG](https://github.com/kevdog824/pyuilder/blob/main/CHANGELOG.md).
 
-## License
+<p align="right"><small><a href="#title">Back to top</a></small></p>
+
+<h2 id="license">License</h2>
 
 MIT.
+
+<p align="right"><small><a href="#title">Back to top</a></small></p>
