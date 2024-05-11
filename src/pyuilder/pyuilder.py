@@ -78,8 +78,10 @@ class Builder(_t.Generic[_T]):
             inspect._ParameterKind.KEYWORD_ONLY,
         ]
 
-    def __getattr__(self, __name: str) -> Setter[_te.Self, _t.Any]:
-        return Setter(self, __name)
+    if not _t.TYPE_CHECKING:
+
+        def __getattr__(self, __name: str) -> Setter[_te.Self, _t.Any]:
+            return Setter(self, __name)
 
     def _break_args(
         self, typ: _t.Type[_T]
@@ -105,6 +107,20 @@ class Builder(_t.Generic[_T]):
         return inst
 
 
+class RelaxedBuilder(Builder[_T]):
+    """Class for adding builders to other classes.
+
+    Much like Builder except it adds static type support for `__getattr__`.
+    Functionally, this will allow the builder to support any field name from a static
+    type checking perspective.
+    """
+
+    if _t.TYPE_CHECKING:
+
+        def __getattr__(self, __name: str) -> Setter[_te.Self, _t.Any]:
+            return Setter(self, __name)
+
+
 ### Builder Generation
 
 
@@ -114,13 +130,13 @@ class Buildable:
         class builder(Builder[_te.Self]): ...  # type: ignore # pragma: no cover
 
     @classmethod  # type: ignore[no-redef]
-    def builder(cls, **kwargs: _t.Any) -> Builder[_te.Self]:
+    def builder(cls, **kwargs: _t.Any) -> RelaxedBuilder[_te.Self]:
         """Create a new builder instance for building the class
 
         Args:
             **kwargs (Any): Can set any number of fields here at construction
         """
-        b: Builder[_te.Self] = Builder(**kwargs)
+        b: RelaxedBuilder[_te.Self] = RelaxedBuilder(**kwargs)
         b.typ = cls
         return b
 
@@ -130,4 +146,4 @@ class Buildable:
                 value.typ = cls  # type: ignore
 
 
-__all__ = ["Buildable", "Builder", "Setter"]
+__all__ = ["Buildable", "Builder", "RelaxedBuilder", "Setter"]
