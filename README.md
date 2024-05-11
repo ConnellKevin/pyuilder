@@ -96,7 +96,7 @@ The setup here ensures correct auto-complete, type hints, etc.:
 
 <h4 id="set-how-strict-static-type-checking-is-done-on-builders">Set How Strict Static Type Checking Is Done on Builders</h4>
 
-If you try out the example about in an IDE you may notice that trying to use the builder with any field name other than the ones you annotated in your custom builder class will end with red squigglies under your code. This is because the `Builder` class is set up to *appear* (see note below) to only allow the fields you explicitly declared to static type checkers.
+If you try out the example above in an IDE you may notice that trying to use the builder with any field name other than the ones you annotated in your custom builder class will end with red squigglies under your code. This is because the `Builder` class is set up to *appear* (see note below) to only allow the fields you explicitly declared to static type checkers.
 
 However, you may want to maintain intellisense for annotated fields but want to be able to use any field without warnings from your static type check. pyuilder offers a variant of `Bulder` called `RelaxedBuilder` that does just that. The setup is exactly the same as above. Just replace `Builder` with `RelaxedBuilder`.
 
