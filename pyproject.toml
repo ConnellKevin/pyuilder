@@ -25,7 +25,9 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3 :: Only",
 ]
-dependencies = []
+dependencies = [
+    "typing_extensions==4.11.0"
+]
 
 
 [project.optional-dependencies]
