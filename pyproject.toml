@@ -11,8 +11,14 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = { file = "LICENSE.txt" }
 keywords = ["builder", "builder_pattern", "design_patterns"]
-authors = [{ name = "Kevin Jerome", email = "kjerome64@gmail.com" }]
-maintainers = [{ name = "Kevin Jerome", email = "kjerome64@gmail.com" }]
+authors = [
+    { name = "Kevin Jerome", email = "kjerome64@gmail.com" },
+    { name = "Connell Boyce", email = "connellboyce17@gmail.com" }
+]
+maintainers = [
+    { name = "Kevin Jerome", email = "kjerome64@gmail.com" },
+    { name = "Connell Boyce", email = "connellboyce17@gmail.com" }
+]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
